@@ -242,6 +242,7 @@ var Layers = {
     Layers.update()
   },
   select: function(i){
+    $(".fonttools.inst").hide()
     Layers.selected = Layers.layers[i];
     $(canvas).css("cursor","move")
     var $li = $($("#layersul li")[Layers.layers.length-Number.parseInt(i)])
