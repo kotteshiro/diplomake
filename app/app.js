@@ -66,7 +66,7 @@ $(function(){
     if(cuantos<=0){
       return
     }
-    var c = confirm("Se generarán "+cuantos+" Archivos, ¿desea continuar?")
+    var c = confirm("Se generarán "+cuantos+" archivos, ¿Desea continuar?")
     if(c){
       Layers.generaAll()
     }
@@ -87,6 +87,9 @@ var Layers = {
   currentoffset: [0,0],
   show_guides: true,
   _init: $(function(){
+    setInterval(function(){
+      Layers.updateCTX()
+    },999)
     lastmovepos = JSON.parse(window.localStorage.getItem("windowspos"))
     Layers.layers = JSON.parse(window.localStorage.getItem("layers"))
     for(var ll in Layers.layers){
@@ -183,7 +186,7 @@ var Layers = {
         console.log("offset", offset)
         Layers.moving_offset = [-e.offsetX, -e.offsetY]
         Layers.moving = true
-        Layers.update()
+        //Layers.update()
       }
     })
 
@@ -290,6 +293,26 @@ var Layers = {
     Layers.$fonttolins.find(".changefontset").on("change", function(){
       console.log("CHANGE FONT", this)
       var fontfamily  = $(this).parent().parent().find(".fonts").find("option:selected").text()
+      if(fontfamily == "- Custom -"){
+        var font = prompt("font url")
+        $('<link href="'+font+'" rel="stylesheet">').appendTo("head")
+        var peda = font.split("?")[1].split("&")
+        for (var seg in peda) {
+          console.log(peda[seg]);
+          var urlParams = new URLSearchParams(peda[seg]);
+          console.log("PATA;", urlParams);
+          var ll = urlParams.get("family")
+          if(ll){
+            console.log("HAS FAMILY", ll);
+            var f = $('<option value="'+ll+'" style="font-family: '+ll+';" selected>'+ll+'</option>')
+            $(".fonts").prepend(f)
+          }
+        }
+
+
+
+        console.log(ll)
+      }
       var fontsize    = $(this).parent().parent().find(".fontsize").val()
       var align       = $(this).parent().parent().find(".align").find("option:selected").text()
       var color       = $(this).parent().parent().find(".colorpic").val()
@@ -376,7 +399,7 @@ var Layers = {
     for(var i in Layers.layers){
       let thislayer = Layers.layers[i]
       if( "image" in thislayer && thislayer.image.src){
-        console.log(JSON.stringify(thislayer.image));
+        //console.log(JSON.stringify(thislayer.image));
         if(!thislayer.image){
           return
         }
@@ -387,7 +410,7 @@ var Layers = {
       }
       if( "text" in thislayer){
         if(thislayer.format){
-          console.log("format>>>", thislayer.format)
+          //console.log("format>>>", thislayer.format)
           ctx.font = thislayer.format.fontsize+'px '+thislayer.format.fontfamily;
           ctx.textAlign = thislayer.format.align.toLowerCase();
           ctx.fillStyle  = thislayer.format.color.toLowerCase();
@@ -411,6 +434,9 @@ var Data = {
   index: 0,
   init: $(function(){
     var data = JSON.parse(window.localStorage.getItem("datasave"))
+    if(!data){
+      data = JSON.parse('[["1","Lorem ipsum dolor sit amet, consectetur adipiscing elit.","Praesent non lectus vitae libero tincidunt vestibulum."],["2","Pellentesque vitae neque at justo tristique eleifend non non mi.","In euismod nulla nec sem interdum facilisis aliquam sed enim."],["3","Curabitur vitae ex in tortor imperdiet luctus ut quis ante.","Quisque aliquam urna nec efficitur hendrerit."],["4","Integer luctus odio a gravida tristique.","Sed finibus ligula nec purus tincidunt blandit."],["5","",""],["6","Nullam nec orci vel eros pellentesque interdum a vel nulla.","Curabitur sit amet enim sit amet odio faucibus consequat quis sed dolor."],["7","Morbi ac odio luctus, tristique quam sit amet, gravida arcu.","Ut sed eros efficitur, eleifend metus ac, finibus felis."],["8","",""],["9","Praesent non lectus vitae libero tincidunt vestibulum.","Sed a quam porttitor felis feugiat tempus."],["10","In euismod nulla nec sem interdum facilisis aliquam sed enim.","Phasellus vitae nunc dictum ante sodales ultricies nec vitae velit."],["11","Quisque aliquam urna nec efficitur hendrerit.","Aliquam hendrerit nisl nec porttitor feugiat."],["12","Sed finibus ligula nec purus tincidunt blandit.","Quisque at libero gravida diam ultricies hendrerit."]]')
+    }
     Data.cols_dyns = JSON.parse(window.localStorage.getItem("cols_dyns"))
     if(!Data.cols_dyns){
       Data.cols_dyns = []
@@ -479,22 +505,27 @@ var Data = {
     var dins = Layers.getDyns()
     var o = $("<option></option>")
     $sel.append(o)
-
-    if(Data.cols_dyn && Data.cols_dyns[col] == "-fname-"){
+    if(!Data.cols_dyns){
+      return
+    }
+    if(Data.cols_dyns[col] == "-fname-"){
       o = $("<option value='-fname-' selected>-fname-</option>")
     }else{
       o = $("<option value='-fname-'>-fname-</option>")
     }
     $sel.append(o)
-    for (var i in dins){
 
-      if(Data.cols_dyn && Data.cols_dyns[col] == dins[i].label){
-        var o = $("<option value='"+dins[i].label+"' selected>"+dins[i].label+"</option>")
+
+    for (var i in dins){
+      console.log( Data.cols_dyns[col] == dins[i].label,  Data.cols_dyns[col], dins[i].label,Data.cols_dyn, Data.cols_dyns[col] == dins[i].label);
+      var o = {}
+      if(Data.cols_dyns[col] == dins[i].label){
+        o = $("<option value='"+dins[i].label+"' selected>"+dins[i].label+"</option>")
       }else{
-        var o = $("<option value='"+dins[i].label+"'>"+dins[i].label+"</option>")
+        o = $("<option value='"+dins[i].label+"'>"+dins[i].label+"</option>")
       }
       $sel.append(o)
-      console.log("din", dins[i].labels)
+      console.log("din", dins[i].label)
     }
 
     return $sel
