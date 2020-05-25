@@ -87,6 +87,12 @@ var Layers = {
   currentoffset: [0,0],
   show_guides: true,
   _init: $(function(){
+    for (var i = 0; i < window.localStorage.length; i++) {
+      if(window.localStorage.key(i).includes("font_")){
+        var font = window.localStorage.key(i)
+        Layers.addFont(window.localStorage.getItem(font))
+      }
+    }
     setInterval(function(){
       Layers.updateCTX()
     },999)
@@ -284,6 +290,25 @@ var Layers = {
     link.click();
     Layers.show_guides = true
   },
+  addFont: function(font) {
+    $('<link href="'+font+'" rel="stylesheet">').appendTo("head")
+    var peda = font.split("?")[1].split("&")
+    var fname="font_"
+    for (var seg in peda) {
+      console.log(peda[seg]);
+      var urlParams = new URLSearchParams(peda[seg]);
+      console.log("PATA;", urlParams);
+      var ll = urlParams.get("family")
+
+      if(ll){
+        fname+="+"+ll;
+        console.log("HAS FAMILY", ll);
+        var f = $('<option value="'+ll+'" style="font-family: '+ll+';" selected>'+ll+'</option>')
+        $(".fonts").prepend(f)
+      }
+    }
+    window.localStorage.setItem("font_"+fname.replace(" ","+"), font)
+  },
   update: function(){
     var check =  ""
     if(Layers.selected){
@@ -298,31 +323,14 @@ var Layers = {
       console.log("CHANGE FONT", this)
       var fontfamily  = $(this).parent().parent().find(".fonts").find("option:selected").text()
       if(fontfamily == "- Custom -"){
-        var font = prompt("font url")
-        $('<link href="'+font+'" rel="stylesheet">').appendTo("head")
-        var peda = font.split("?")[1].split("&")
-        for (var seg in peda) {
-          console.log(peda[seg]);
-          var urlParams = new URLSearchParams(peda[seg]);
-          console.log("PATA;", urlParams);
-          var ll = urlParams.get("family")
-          window.localStorae.setItem("font_"+ll.replace(" ","+"))
-          if(ll){
-            console.log("HAS FAMILY", ll);
-            var f = $('<option value="'+ll+'" style="font-family: '+ll+';" selected>'+ll+'</option>')
-            $(".fonts").prepend(f)
-          }
-        }
-
-
-
-        console.log(ll)
+        var font = prompt("Font url (ex: https://fonts.googleapis.com/css2?family=Bree+Serif&family=Chelsea+Market)")
+        if(font)
+          Layers.addFont(font)
       }
       var fontsize    = $(this).parent().parent().find(".fontsize").val()
       var align       = $(this).parent().parent().find(".align").find("option:selected").text()
       var color       = $(this).parent().parent().find(".colorpic").val()
       Layers.selected.format = {fontfamily,fontsize,align, color}
-      console.log("!!CHANGE FONT>>>>>",fontfamily, fontsize, align, color);
       Layers.updateCTX()
     })
 
