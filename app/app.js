@@ -338,7 +338,10 @@ var Layers = {
     Layers.$fonttolins.find("#hidefonttools").on("click", function(){
       $(".fonttools.inst").hide()
     })
-    $(layersul).html("<li><label><input type='radio' name='selectedlayer' value='' "+check+"/>No Selected</label></li>")
+    $(layersul).html("<li><label><input type='radio' class='noselected' name='selectedlayer' value='' "+check+"/>No Selected</label></li>")
+    $(layersul).find(".noselected").on("click", function(){
+        $(".txtedit").hide()
+    })
     Layers.layers.reverse()
     var lysd=Layers.layers.slice()
     Layers.layers.reverse()
@@ -354,8 +357,8 @@ var Layers = {
       $(layersul).append(elm)
       elm.find(".txtedit").on("click", function(){
           Layers.$fonttolins.show()
-          $(".txtedit").hide()
       })
+      console.log("elm[0]", elm[0])
       elm[0].addEventListener("dblclick", function(){
         //var t = window.prompt("Layer Name:")
         //Layers.selected.label = t.replace(" ","_")
