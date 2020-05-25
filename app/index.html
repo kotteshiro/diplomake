@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Diplomake</title>
+  <link href="stylesheet.css" rel="stylesheet">
+  <script src="jquery.min.js"></script>
+</head>
+<body style="font-family: Notera;">
+  <input type="file" name="fileinput" value="" id="fileinput" style="display: none;" accept="image/*">
+  <canvas id="canvas" width="1576" height="1214"></canvas>
+  <div class="layers">
+
+      <div class="barri">
+        <button type="button" name="button" id="clear">🗑</button>
+      </div>
+      <div class="fonttools_">
+        <div class="rowatool">
+          <label for="" class="fontlbl">Font family:</label>
+          <select class="fonts changefontset" name="font">
+            <option value="Georgia, serif" style="font-family: Georgia, serif;">Georgia, serif</option>
+            <option value='"Palatino Linotype", "Book Antiqua", Palatino, serif' style='font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;'>"Palatino Linotype", "Book Antiqua", Palatino, serif</option>
+            <option value='"Times New Roman", Times, serif' style='font-family: "Times New Roman", Times, serif;'>"Times New Roman", Times, serif</option>
+
+            <option value='Arial, Helvetica, sans-serif' style='font-family: Arial, Helvetica, sans-serif;'>Arial, Helvetica, sans-serif</option>
+            <option value='"Arial Black", Gadget, sans-serif' style='font-family: "Arial Black", Gadget, sans-serif;'>"Arial Black", Gadget, sans-serif</option>
+            <option value='"Comic Sans MS", cursive, sans-serif' style='font-family: "Comic Sans MS", cursive, sans-serif;'>"Comic Sans MS", cursive, sans-serif</option>
+            <option value='Impact, Charcoal, sans-serif' style='font-family: Impact, Charcoal, sans-serif;'>Impact, Charcoal, sans-serif</option>
+            <option value='"Lucida Sans Unicode", "Lucida Grande", sans-serif' style='font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;'>"Lucida Sans Unicode", "Lucida Grande", sans-serif</option>
+            <option value='Tahoma, Geneva, sans-serif' style='font-family: Tahoma, Geneva, sans-serif;'>Tahoma, Geneva, sans-serif</option>
+            <option value='"Trebuchet MS", Helvetica, sans-serif' style='font-family: "Trebuchet MS", Helvetica, sans-serif;'>"Trebuchet MS", Helvetica, sans-serif</option>
+            <option value='Verdana, Geneva, sans-serif' style='font-family: Verdana, Geneva, sans-serif;'>Verdana, Geneva, sans-serif</option>
+
+            <option value='"Courier New", Courier, monospace' style='font-family: "Courier New", Courier, monospace;'>"Courier New", Courier, monospace</option>
+            <option value='"Lucida Console", Monaco, monospace' style='font-family: "Lucida Console", Monaco, monospace;'>"Lucida Console", Monaco, monospace'</option>
+
+            <option value="">- Custom -</option>
+          </select>
+        </div>
+        <div class="rowatool">
+          <label for="" class="fontlbl">Font size:</label>
+          <input type="number" class="fontsize changefontset" name="" value=63> px
+        </div>
+        <div class="rowatool">
+          <label for="" class="fontlbl">Align:</label>
+          <select class="align changefontset" name="align">
+            <option value="left">left</option>
+            <option value="center">center</option>
+            <option value="right">right</option>
+          </select>
+        </div>
+        <div class="rowatool">
+          <label for="" class="fontlbl">Color:</label>
+          <input class="changefontset colorpic" type="color" name="colorpic" id="colorpic" value="#000000  ">
+        </div>
+        <div class="rowatool" style="width: 100%; text-align: right;">
+          <button type="button" name="button" id="hidefonttools">✔</button>
+        </div>
+      </div>
+      <div class="datalist">
+        <div class="datawrp">
+          <table class="tableplot">
+          </table>
+        </div>
+        <input type="text" id="datapaste" name="data" value="" placeholder="Paste your data here">
+        <button type="button" name="button" id="hidedatalist">✔</button>
+      </div>
+      <ul id="layersul">
+        <li></li>
+      </ul>
+      <div class="tools">
+        <button type="button" name="button"><label for="fileinput">🎨</label></button>
+        <button type="button" name="button" id="addnota">🆎</button>
+        <button type="button" name="button" class="" id="lista">📔</button>
+        <button type="button" name="button" class="" id="change_value">♻</button>
+
+        <button type="button" name="button" class="r" id="play">▶</button>
+        <button type="button" name="button" class="r" id="test">🎈</button>
+      </div>
+    </div>
+
+  <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

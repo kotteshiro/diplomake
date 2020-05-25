@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'Notera';
+    src: url('Notera2Medium.woff2') format('woff2'),
+        url('Notera2Medium.woff') format('woff'),
+        url('Notera2Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+canvas{
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 1px dotted #b903ff;
+}
+
+footer{
+  position: absolute;
+  bottom: 5em;
+  height: 6em;
+  font-size: 1em;
+  width: 96vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  left: 0;
+}
+#hidefonttools{
+  margin: auto;
+}
+.rowatool{
+
+}
+footer div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: start;
+}
+
+footer div button{
+  font-size: 6em;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+.layers{
+  background: #d1e1dc;
+  min-width: 18em;
+  box-shadow: #0000004f -2px 3px 5px 2px;
+  z-index: 999;
+  position: absolute;
+  font-family: cursive;
+}
+.layers .barri{
+  background-color: gray;
+  height: 1.5em;
+  cursor: move;
+}
+ul#layersul{
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+li{
+    background-color: #d1d1d1;
+}
+button.txtedit{
+  margin-right: 1em;
+  background: none;
+  border: none;
+}
+li label{
+  display: inline-block;
+  width: 16em;
+  padding: 1em;
+}
+input[type="radio"] {
+    margin-right: 1em;
+}
+label.fontlbl {
+    width: 6em;
+    display: inline-block;
+    padding: 3px;
+}
+.fonttools {
+    padding: 1em;
+    background: white;
+}
+.tools, .tools button{
+  font-size: 1em;
+}
+.tools button{
+  line-height: 2em;
+  min-width: 2em;
+  float: left;
+  margin: 3px;
+}
+.tools button.r{
+  float: right;
+}
+.datalist{
+  display: block;
+  z-index: 9999;
+  background-color: #FFF;
+  font-size: 16px;
+  font-family: monospace;
+  padding: 1em;
+}
+.datawrp{
+  overflow-y: scroll;
+  overflow-x: auto;
+  min-width: 20em;
+  height: 20em;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 8px;
+  border-style: dotted;
+  padding: 3px;
+}
+#hidedatalist{
+  float: right;
+  margin-right: 3em;
+}
+.dyn{
+  color: blue;
+}
+.dyn::after {
+    content: "🔗";
+    font-size: 13px;
+    margin-left: 6px;
+}
