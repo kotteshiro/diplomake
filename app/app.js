@@ -357,9 +357,9 @@ var Layers = {
           $(".txtedit").hide()
       })
       elm[0].addEventListener("dblclick", function(){
-        var t = window.prompt("Layer Name:")
-        Layers.selected.label = t.replace(" ","_")
-        Layers.update()
+        //var t = window.prompt("Layer Name:")
+        //Layers.selected.label = t.replace(" ","_")
+        //Layers.update()
       })
     }
 
