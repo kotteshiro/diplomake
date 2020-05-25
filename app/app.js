@@ -111,6 +111,10 @@ var Layers = {
     console.log("sett|",lastmovepos)
     $(".layers").css({"left": lastmovepos[0], "top": lastmovepos[1]})
     $("#clear").on("click", function(){
+      var asn=confirm("Everything will be erased")
+      if(!asn){
+        return;
+      }
       Layers.layers=[]
 
       for (var i = 0; i < window.localStorage.length; i++) {
@@ -302,6 +306,7 @@ var Layers = {
           var urlParams = new URLSearchParams(peda[seg]);
           console.log("PATA;", urlParams);
           var ll = urlParams.get("family")
+          window.localStorae.setItem("font_"+ll.replace(" ","+"))
           if(ll){
             console.log("HAS FAMILY", ll);
             var f = $('<option value="'+ll+'" style="font-family: '+ll+';" selected>'+ll+'</option>')
@@ -470,7 +475,7 @@ var Data = {
   getNext: function(){
     Data.index++
     if(Data.index > Data.data.length){
-      Data.index = -2
+      Data.index = 0; //-2
     }
     if(Data.index<0){
       if (Data.index==-1) {
